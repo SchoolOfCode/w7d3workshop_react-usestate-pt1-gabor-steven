@@ -6,12 +6,22 @@ import { bootcampers, compliments } from "./bootcampers.js";
 function App() {
   const [bootcamperIndex, setBoootcamperIndex] = useState(0);
   const [complimentIndex, setComplimentIndex] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
-  function handleClick() {
+  function handleRandomClick() {
     let randomNumber = Math.floor(Math.random() * bootcampers.length);
     setBoootcamperIndex(randomNumber);
     let secondNumber = Math.floor(Math.random() * compliments.length);
     setComplimentIndex(secondNumber);
+  }
+
+  function toggleActiveButton() {
+    if (isActive) {
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
+    console.log(isActive);
   }
 
   return (
@@ -20,7 +30,12 @@ function App() {
       <p>
         {bootcampers[bootcamperIndex]} {compliments[complimentIndex]}
       </p>
-      <button onClick={handleClick}>Click me for a random bootcamper!</button>
+      <button onClick={handleRandomClick} disabled={isActive}>
+        Click me for a random bootcamper!
+      </button>
+      <button onClick={toggleActiveButton}>
+        Click me to toggle random button
+      </button>
     </div>
   );
 }
